@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oquequitempcume?</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-bg"></div>
+
+    <header class="site-header reveal-section">
+      <nav class="site-nav" aria-label="Menu principal">
+        <a href="#buscar">Buscar</a>
+        <a href="#selecionados">Calorias</a>
+        <a href="#chat">Chat</a>
+      </nav>
+
+      <section class="hero">
+        <p class="eyebrow">TACO + TBCA/USP + marcas online</p>
+        <h1 class="brand-title"><span class="broccoli-o" aria-hidden="true">O</span>quequitempcume?</h1>
+        <p class="hero-copy">Pesquise um alimento uma vez só. O site mistura ingredientes da TACO, resultados da TBCA/USP e produtos de marca do Open Food Facts.</p>
+
+        <div class="global-search search-expanded" id="buscar">
+          <label for="searchInput">O que tem em casa?</label>
+          <div class="search-row">
+            <input id="searchInput" type="search" placeholder="Ex.: frango, arroz, tomate, Nescau, iogurte...">
+            <select id="categoryFilter" aria-label="Filtrar por categoria">
+              <option value="">Todas as categorias</option>
+            </select>
+            <select id="sourceFilter" aria-label="Filtrar por fonte">
+              <option value="all">Todas as fontes</option>
+              <option value="TACO">TACO</option>
+              <option value="TBCA/USP">TBCA/USP</option>
+              <option value="Open Food Facts">Marcas</option>
+            </select>
+          </div>
+          <div class="source-strip">
+            <span id="foodCount">0</span>
+            <span id="onlineStatus" aria-live="polite">Digite para buscar nas fontes disponíveis.</span>
+          </div>
+          <div id="results" class="results dropdown-results" aria-live="polite"></div>
+          <button id="onlineSearchButton" class="ghost-button hidden-control" type="button">Buscar online</button>
+        </div>
+      </section>
+    </header>
+
+    <main class="site-main">
+      <section class="work-zone reveal-section" id="selecionados">
+        <section class="results-zone">
+          <div class="section-heading">
+            <p class="eyebrow">Diário</p>
+            <h2>Consumo de hoje</h2>
+          </div>
+          <div class="daily-panel">
+            <div class="daily-target">
+              <label for="dailyGoalInput">Necessidade diária</label>
+              <div>
+                <input id="dailyGoalInput" type="number" min="500" step="50" value="2000">
+                <span>kcal</span>
+              </div>
+            </div>
+
+            <button id="logMealButton" class="send-button" type="button">Guardar seleção no dia</button>
+
+            <div class="daily-total">
+              <span>Consumido até agora</span>
+              <strong id="dailyKcalTotal">0 kcal</strong>
+              <small id="dailyKcalRemaining">2000 kcal restantes</small>
+            </div>
+
+            <div class="progress-bar" aria-label="Progresso calórico diário">
+              <span id="dailyProgressBar"></span>
+            </div>
+
+            <div class="daily-chart" id="macroChart">
+              <div class="chart-row">
+                <span>Proteínas</span>
+                <div><i id="chartProtein"></i></div>
+                <strong id="dailyProteinTotal">0 g</strong>
+              </div>
+              <div class="chart-row">
+                <span>Carboidratos</span>
+                <div><i id="chartCarb"></i></div>
+                <strong id="dailyCarbTotal">0 g</strong>
+              </div>
+              <div class="chart-row">
+                <span>Gorduras</span>
+                <div><i id="chartFat"></i></div>
+                <strong id="dailyFatTotal">0 g</strong>
+              </div>
+              <div class="chart-row">
+                <span>Fibras</span>
+                <div><i id="chartFiber"></i></div>
+                <strong id="dailyFiberTotal">0 g</strong>
+              </div>
+            </div>
+
+            <div class="micro-grid">
+              <div><span>Cálcio</span><strong id="dailyCalciumTotal">0 mg</strong></div>
+              <div><span>Ferro</span><strong id="dailyIronTotal">0 mg</strong></div>
+              <div><span>Sódio</span><strong id="dailySodiumTotal">0 mg</strong></div>
+              <div><span>Potássio</span><strong id="dailyPotassiumTotal">0 mg</strong></div>
+              <div><span>Vitamina C</span><strong id="dailyVitaminCTotal">0 mg</strong></div>
+            </div>
+
+            <div class="meal-history">
+              <div class="history-heading">
+                <span>Registros</span>
+                <button id="clearDiaryButton" class="ghost-button" type="button">Limpar dia</button>
+              </div>
+              <div id="mealHistoryList" class="meal-history-list empty-state">Nenhum alimento registrado hoje.</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="nutrition-zone">
+          <div class="nutrition-summary">
+            <div class="main-total">
+              <span>Total estimado</span>
+              <strong id="totalKcal">0 kcal</strong>
+              <small id="portionKcal">0 kcal por porção</small>
+            </div>
+
+            <div class="servings-control">
+              <label for="servingsInput">Porções</label>
+              <input id="servingsInput" type="number" min="1" max="12" value="1">
+            </div>
+
+            <div class="macro-grid">
+              <div><span>Proteínas</span><strong id="proteinTotal">0 g</strong></div>
+              <div><span>Carboidratos</span><strong id="carbTotal">0 g</strong></div>
+              <div><span>Gorduras</span><strong id="fatTotal">0 g</strong></div>
+              <div><span>Fibras</span><strong id="fiberTotal">0 g</strong></div>
+            </div>
+          </div>
+
+          <section class="selection-panel">
+            <div class="section-heading inline">
+              <div>
+                <p class="eyebrow">Seleção</p>
+                <h2>Ingredientes da receita</h2>
+              </div>
+              <button id="clearButton" class="ghost-button" type="button">Limpar</button>
+            </div>
+            <div id="selectedList" class="selected-list empty-state">
+              Escolha ingredientes na busca.
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="chat-zone reveal-section" id="chat">
+        <div class="section-heading">
+          <p class="eyebrow">Apoio</p>
+          <h2>Chat coadjuvante</h2>
+        </div>
+
+        <div class="chat-panel">
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+
+          <div id="suggestionsPanel" class="suggestions-panel" hidden>
+            <div class="suggestions-header">
+              <span>Ingredientes encontrados</span>
+              <button id="addSuggestionsButton" class="ghost-button" type="button">Adicionar informados</button>
+            </div>
+            <div id="suggestionsList" class="suggestions-list"></div>
+          </div>
+
+          <form id="chatForm" class="chat-form">
+            <textarea id="chatInput" placeholder="Ex.: Tenho frango, arroz e tomate. Quero algo leve." rows="3"></textarea>
+            <button class="send-button" type="submit">Enviar</button>
+          </form>
+          <button id="generateRecipeButton" class="ghost-button recipe-button" type="button">Gerar receita com seleção atual</button>
+        </div>
+      </section>
+
+      <section class="tech-zone reveal-section" id="integracao">
+        <div class="section-heading inline">
+          <div>
+            <p class="eyebrow">Integração</p>
+            <h2>Prompt técnico para IA open source</h2>
+          </div>
+          <button id="copyPromptButton" class="ghost-button" type="button">Copiar</button>
+        </div>
+        <textarea id="llmPrompt" readonly></textarea>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Oquequitempcume? - TACO local, TBCA/USP online e marcas online.</span>
+      <span>Use dados TBCA/USP respeitando a licença e citação da fonte.</span>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="data/alimentos.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
